@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oblivion Trilogy - Space Invasion Story</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --space-dark: #0B0B2B;
+            --neon-blue: #00F3FF;
+            --nebula-purple: #7D46FF;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--space-dark);
+            color: #E0E0FF;
+            overflow-x: hidden;
+        }
+        
+        .hero-gradient {
+            background: radial-gradient(circle at center, rgba(125, 70, 255, 0.3) 0%, rgba(11, 11, 43, 0) 70%);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+        
+        .book-cover {
+            perspective: 1000px;
+        }
+        
+        .book-cover:hover img {
+            transform: rotateY(15deg) scale(1.03);
+        }
+        
+        .book-cover img {
+            transition: transform 0.5s ease;
+        }
+        
+        .reader-content {
+            height: 70vh;
+            border: 1px solid #303050;
+        }
+        
+        .prose-invert {
+            color: #E0E0FF;
+            font-size: 1.125rem;
+            line-height: 1.8;
+        }
+        
+        .prose-invert p {
+            margin-bottom: 1.5rem;
+        }
+        
+        #readingModal {
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="relative min-h-screen hero-gradient flex flex-col">
+        <!-- Parallax Background Elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-0 right-0 w-1/3 h-1/3 bg-purple-500 opacity-10 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-blue-500 opacity-10 rounded-full filter blur-3xl"></div>
+        </div>
+        
+        
+        <div class="relative z-10 flex-grow flex flex-col items-center justify-center px-4 py-24">
+            <div class="text-center max-w-4xl mx-auto">
+                <h1 class="text-6xl md:text-8xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+                    OBLIVION
+                </h1>
+                <h2 class="text-xl md:text-3xl font-light mb-8 text-blue-200">A trilogy of cosmic invasion</h2>
+                <p class="text-lg md:text-xl mb-12 opacity-90">
+                    ...incomplete like piece of a puzzle with no clear picture emerging.'they are not responding to any signal'...
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button id="startReadingBtn" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all">
+                        Start Reading Book 1
+                    </button>
+                    <button class="px-8 py-3 border border-blue-400 text-blue-300 rounded-full font-semibold hover:bg-blue-900/30 transition-all">
+                        Learn About The Saga
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Trilogy Showcase -->
+        <div class="relative pb-24 px-8">
+            <h3 class="text-center text-3xl font-bold mb-16 text-white">The Complete Trilogy</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+                <!-- Book 1 -->
+                <div class="book-cover group cursor-pointer">
+                    <div class="relative mb-6 overflow-hidden rounded-lg shadow-xl">
+                        <img src="resources/oblivion1.png" alt="Book cover for Oblivion 1 showing a massive alien spacecraft descending over Earth's atmosphere" class="w-full h-auto transition-all duration-300 group-hover:scale-105"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                            <span class="text-white font-medium">First Contact</span>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">OBLIVION 1</h4>
+                    <p class="text-blue-200 opacity-90">The invasion begins</p>
+                </div>
+                
+                <!-- Book 2 -->
+                <div class="book-cover group cursor-pointer">
+                    <div class="relative mb-6 overflow-hidden rounded-lg shadow-xl">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8ca49aea-8d06-47d4-97d3-bcf47c84913b.png" alt="Book cover for Oblivion 2 depicting a ruined cityscape with alien warships hovering above" class="w-full h-auto transition-all duration-300 group-hover:scale-105"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                            <span class="text-white font-medium">Total War</span>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">OBLIVION 2</h4>
+                    <p class="text-blue-200 opacity-90">Humanity fights back</p>
+                </div>
+                
+                <!-- Book 3 -->
+                <div class="book-cover group cursor-pointer">
+                    <div class="relative mb-6 overflow-hidden rounded-lg shadow-xl">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/83dcb65d-a3e2-4631-9009-2eb85f451316.png" alt="Book cover for Oblivion 3 showing a lone astronaut facing an enormous alien creature in deep space" class="w-full h-auto transition-all duration-300 group-hover:scale-105"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                            <span class="text-white font-medium">Final Reckoning</span>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">OBLIVION 3</h4>
+                    <p class="text-blue-200 opacity-90">The destiny of Earth</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Reading Modal -->
+    <div id="readingModal" class="fixed inset-0 bg-black/90 z-50 hidden">
+        <div class="container mx-auto py-16 px-4 h-full flex flex-col">
+            <button id="closeModal" class="absolute top-4 right-4 text-white text-3xl">&times;</button>
+            <div class="reader-content bg-space-dark p-8 rounded-lg max-w-4xl mx-auto overflow-y-auto">
+                <h2 id="chapterTitle" class="text-3xl font-bold mb-6 text-neon-blue"></h2>
+                <div id="chapterContent" class="prose prose-invert max-w-none"></div>
+            </div>
+            <div class="flex justify-between mt-8 max-w-4xl mx-auto w-full">
+                <button id="prevChapter" class="bg-nebula-purple px-6 py-3 rounded-lg font-medium">Previous Chapter</button>
+                <span id="chapterIndicator" class="self-center text-blue-300">Chapter 1</span>
+                <button id="nextChapter" class="bg-nebula-purple px-6 py-3 rounded-lg font-medium">Next Chapter</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- UFO Home Button -->
+    <a href="index.html" id="ufoHomeBtn" title="Return Home" class="fixed top-6 right-8 z-50 group" style="cursor:pointer;">
+        <svg width="64" height="40" viewBox="0 0 64 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-lg transition-transform duration-300 group-hover:scale-110">
+            <!-- UFO body -->
+            <ellipse cx="32" cy="28" rx="24" ry="8" fill="#a3e3ff" stroke="#4fd1ff" stroke-width="2"/>
+            <!-- UFO dome -->
+            <ellipse cx="32" cy="22" rx="12" ry="6" fill="#e0e0ff" stroke="#4fd1ff" stroke-width="2"/>
+            <!-- UFO lights -->
+            <circle cx="20" cy="28" r="2" fill="#fff200"/>
+            <circle cx="32" cy="28" r="2" fill="#ff6bcb"/>
+            <circle cx="44" cy="28" r="2" fill="#00ffb3"/>
+            <!-- UFO beam (on hover) -->
+            <g class="group-hover:opacity-60 opacity-0 transition-opacity duration-300">
+                <polygon points="28,36 36,36 32,60" fill="#a3e3ff"/>
+            </g>
+        </svg>
+    </a>
+
+    <script src="src/index.js"></script>
+</body>
+</html>
