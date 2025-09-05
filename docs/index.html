@@ -3,177 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oblivion Trilogy - Space Invasion Story</title>
+    <title>Oblivion: The Silent Dusk</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --space-dark: #0B0B2B;
-            --neon-blue: #00F3FF;
-            --nebula-purple: #7D46FF;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Exo+2:wght@300;600;900&display=swap');
         
         body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: var(--space-dark);
-            color: #E0E0FF;
+            font-family: 'Exo 2', sans-serif;
+            background-color: #0a0a1a;
+            color: #e0e0ff;
             overflow-x: hidden;
         }
         
-        .hero-gradient {
-            background: radial-gradient(circle at center, rgba(125, 70, 255, 0.3) 0%, rgba(11, 11, 43, 0) 70%);
+        .space-gradient {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
         }
         
-        .pulse-animation {
-            animation: pulse 2s infinite;
+        .signal-pulse {
+            animation: pulse 3s infinite;
         }
         
         @keyframes pulse {
-            0% { opacity: 0.8; }
-            50% { opacity: 1; }
-            100% { opacity: 0.8; }
+            0% { box-shadow: 0 0 0 0 rgba(0, 150, 255, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(0, 150, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 150, 255, 0); }
         }
         
-        .book-cover {
-            perspective: 1000px;
+        .glitch-effect {
+            position: relative;
         }
         
-        .book-cover:hover img {
-            transform: rotateY(15deg) scale(1.03);
+        .glitch-effect::before {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            text-shadow: -2px 0 #ff00c1;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
         }
         
-        .book-cover img {
-            transition: transform 0.5s ease;
+        @keyframes glitch-anim {
+            0% { clip: rect(31px, 9999px, 94px, 0); }
+            10% { clip: rect(112px, 9999px, 76px, 0); }
+            20% { clip: rect(85px, 9999px, 77px, 0); }
+            30% { clip: rect(27px, 9999px, 97px, 0); }
+            40% { clip: rect(64px, 9999px, 98px, 0); }
+            50% { clip: rect(61px, 9999px, 85px, 0); }
+            60% { clip: rect(99px, 9999px, 114px, 0); }
+            70% { clip: rect(34px, 9999px, 115px, 0); }
+            80% { clip: rect(98px, 9999px, 129px, 0); }
+            90% { clip: rect(43px, 9999px, 96px, 0); }
+            100% { clip: rect(82px, 9999px, 64px, 0); }
         }
         
-        .reader-content {
-            height: 70vh;
-            border: 1px solid #303050;
+        .terminal {
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid #00ffaa;
+            border-radius: 5px;
+            font-family: 'Space Mono', monospace;
+            position: relative;
         }
         
-        .prose-invert {
-            color: #E0E0FF;
-            font-size: 1.125rem;
-            line-height: 1.8;
+        .terminal::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(to right, #00ffaa, #0099ff);
+            border-radius: 5px 5px 0 0;
+            opacity: 0.3;
         }
         
-        .prose-invert p {
-            margin-bottom: 1.5rem;
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #00ffaa;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
         }
         
-        #readingModal {
-            backdrop-filter: blur(10px);
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00ffaa }
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
     </style>
 </head>
-<body>
-    <!-- Hero Section -->
-    <div class="relative min-h-screen hero-gradient flex flex-col">
-        <!-- Parallax Background Elements -->
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-0 right-0 w-1/3 h-1/3 bg-purple-500 opacity-10 rounded-full filter blur-3xl"></div>
-            <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-blue-500 opacity-10 rounded-full filter blur-3xl"></div>
-        </div>
-        
-        
-        <div class="relative z-10 flex-grow flex flex-col items-center justify-center px-4 py-24">
-            <div class="text-center max-w-4xl mx-auto">
-                <h1 class="text-6xl md:text-8xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
-                    OBLIVION
+<body class="space-gradient min-h-screen">
+    <div class="container mx-auto px-4 py-12">
+        <!-- Hero Section -->
+        <div class="flex flex-col lg:flex-row items-center justify-between mb-16 " style="height: 100vh;">
+            <div class="lg:w-1/2 mb-10 lg:mb-0">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 glitch-effect" data-text="OBLIVION">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-600">OBLIVION</span>
                 </h1>
-                <h2 class="text-xl md:text-3xl font-light mb-8 text-blue-200">A trilogy of cosmic invasion</h2>
-                <p class="text-lg md:text-xl mb-12 opacity-90">
-                    ...incomplete like piece of a puzzle with no clear picture emerging.'they are not responding to any signal'...
-                </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <button id="startReadingBtn" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/30 transition-all">
-                        Start Reading Book 1
+                <h2 class="text-2xl md:text-3xl font-semibold mb-4 text-cyan-300">SEASON 1: "The Silent Dusk"</h2>
+                <p class="text-lg mb-8 text-gray-300">A mysterious transmission from the depths of space threatens to unravel reality itself.</p>
+                <div class="flex space-x-4">
+                    <button class="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105" onclick="window.location.href='../index.html'">
+                        Read Now
                     </button>
-                    <button class="px-8 py-3 border border-blue-400 text-blue-300 rounded-full font-semibold hover:bg-blue-900/30 transition-all">
-                        Learn About The Saga
+                    <button class="border-2 border-cyan-600 text-cyan-300 hover:bg-cyan-900 hover:text-white px-6 py-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105">
+                        Learn More
                     </button>
+                </div>
+            </div>
+            <div class="lg:w-1/2 flex justify-center">
+                <div class="relative">
+                    <img src="/resources/photos/Elara.JPG" alt="Dr. Elara Vex in her high-tech observatory analyzing cosmic signals on multiple holographic displays" class="rounded-lg shadow-2xl border-2 border-cyan-500" style="width:900px; height:500px; object-fit:cover;" />
+                    <div class="absolute -bottom-5 -right-5 bg-purple-900 p-4 rounded-lg shadow-lg border border-cyan-400">
+                        <p class="text-sm font-mono text-cyan-200">TRANSMISSION DETECTED</p>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- Trilogy Showcase -->
-        <div class="relative pb-24 px-8">
-            <h3 class="text-center text-3xl font-bold mb-16 text-white">The Complete Trilogy</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
-                <!-- Book 1 -->
-                <div class="book-cover group cursor-pointer">
-                    <div class="relative mb-6 overflow-hidden rounded-lg shadow-xl">
-                        <img src="/resources/photos/oblivion1.png" alt="Book cover for Oblivion 1 showing a massive alien spacecraft descending over Earth's atmosphere" class="w-full h-auto transition-all duration-300 group-hover:scale-105"/>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                            <span class="text-white font-medium">First Contact</span>
-                        </div>
+        <!-- Story Section -->
+        <div class="mb-20">
+            <div class="terminal p-6 mb-10">
+                <div class="flex space-x-2 mb-4">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                </div>
+                <div class="font-mono text-green-400">
+                    <p class="mb-2">> INITIATING STORY PROTOCOL...</p>
+                    <p class="mb-2">> LOADING SEASON 1: "THE SILENT DUSK"</p>
+                    <p class="typewriter">> SYSTEM READY...</p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-gray-900 bg-opacity-70 p-6 rounded-lg border border-cyan-800 hover:border-cyan-400 transition-all duration-300">
+                    <div class="w-16 h-16 mb-4 mx-auto signal-pulse rounded-full flex items-center justify-center bg-cyan-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                        </svg>
                     </div>
-                    <h4 class="text-xl font-bold mb-2">OBLIVION 1</h4>
-                    <p class="text-blue-200 opacity-90">The invasion begins</p>
+                    <h3 class="text-xl font-bold mb-3 text-center text-cyan-300">The Discovery</h3>
+                    <p class="text-gray-300">Dr. Elara Vex detects an anomalous signal from Proxima Centauri b while working late at the Lunar Deep Space Array.</p>
                 </div>
                 
-                <!-- Book 2 -->
-                <div class="book-cover group cursor-pointer">
-                    <div class="relative mb-6 overflow-hidden rounded-lg shadow-xl">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8ca49aea-8d06-47d4-97d3-bcf47c84913b.png" alt="Book cover for Oblivion 2 depicting a ruined cityscape with alien warships hovering above" class="w-full h-auto transition-all duration-300 group-hover:scale-105"/>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                            <span class="text-white font-medium">Total War</span>
-                        </div>
+                <div class="bg-gray-900 bg-opacity-70 p-6 rounded-lg border border-purple-800 hover:border-purple-400 transition-all duration-300">
+                    <div class="w-16 h-16 mb-4 mx-auto rounded-full flex items-center justify-center bg-purple-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
                     </div>
-                    <h4 class="text-xl font-bold mb-2">OBLIVION 2</h4>
-                    <p class="text-blue-200 opacity-90">Humanity fights back</p>
+                    <h3 class="text-xl font-bold mb-3 text-center text-purple-300">Strange Phenomena</h3>
+                    <p class="text-gray-300">As the signal intensifies, unexplained events occur worldwide - electronics malfunction, animals behave erratically, and people report vivid shared dreams.</p>
                 </div>
                 
-                <!-- Book 3 -->
-                <div class="book-cover group cursor-pointer">
-                    <div class="relative mb-6 overflow-hidden rounded-lg shadow-xl">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/83dcb65d-a3e2-4631-9009-2eb85f451316.png" alt="Book cover for Oblivion 3 showing a lone astronaut facing an enormous alien creature in deep space" class="w-full h-auto transition-all duration-300 group-hover:scale-105"/>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                            <span class="text-white font-medium">Final Reckoning</span>
+                <div class="bg-gray-900 bg-opacity-70 p-6 rounded-lg border border-red-800 hover:border-red-400 transition-all duration-300">
+                    <div class="w-16 h-16 mb-4 mx-auto rounded-full flex items-center justify-center bg-red-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center text-red-300">The Truth</h3>
+                    <p class="text-gray-300">Elara deciphers the signal's mathematical patterns, revealing it's not just a message - it's a countdown to something unimaginable.</p>
+                </div>
+            </div>
+            
+            <div class="bg-black bg-opacity-60 p-8 rounded-xl border border-gray-800 mb-12">
+                <h3 class="text-2xl font-bold mb-6 text-center text-cyan-300">Full Episode Synopsis</h3>
+                <div class="space-y-6 text-gray-300">
+                    <p>The series premieres with Dr. Elara Vex, a brilliant but reclusive astrobiologist working at the Lunar Deep Space Array. While reviewing routine data, she stumbles upon an anomalous signal originating from Proxima Centauri b. The signal defies all known natural phenomena - its mathematical structure suggests artificial origin.</p>
+                    
+                    <p>As Elara investigates further, the signal grows stronger and more complex. Strange occurrences begin worldwide: electronics malfunction in synchronized patterns, migratory animals change course simultaneously, and people across different continents report identical vivid dreams of a "great awakening."</p>
+                    
+                    <p>The scientific community is divided - some believe it's a hoax, others think it's natural phenomena, but Elara becomes convinced it's an intentional message. When she discovers the signal contains what appears to be a countdown embedded in prime numbers, she races against time to decipher its meaning before the mysterious transmission completes its sequence.</p>
+                    
+                    <p>The episode ends with a shocking revelation - the signal isn't just coming from Proxima Centauri b. It's being relayed from somewhere much farther away... and much older.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Character Spotlight -->
+        <div class="mb-20">
+            <h2 class="text-3xl font-bold mb-12 text-center text-cyan-300">Main Characters</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500">
+                    <img src="/resources/photos/Elara.JPG" alt="Dr. Elara Vex - intense female scientist in her 40s with short dark hair, wearing a lab coat over practical clothing, holding a tablet displaying cosmic data" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-2xl font-bold text-white">Dr. Elara Vex</h3>
+                        <p class="text-cyan-200">Astrobiologist</p>
+                        <p class="text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Brilliant but socially awkward scientist who first detects the signal. Her obsession with finding extraterrestrial life has cost her personal relationships.</p>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500">
+                    <img src="/resources/photos/jax.JPG" alt="Commander Jax Ryker - rugged male astronaut in his 50s with graying hair, wearing a flight suit, standing in front of a spacecraft control panel" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-2xl font-bold text-white">Commander Jax Ryker</h3>
+                        <p class="text-purple-200">Former Astronaut</p>
+                        <p class="text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Skeptical veteran of multiple Mars missions who becomes Elara's reluctant ally when the military takes interest in her discovery.</p>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500">
+                    <img src="/resources/photos/linh.JPG" alt="Dr. Linh Tran - young female computer scientist with glasses and colorful hair, surrounded by holographic code projections" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-2xl font-bold text-white">Dr. Linh Tran</h3>
+                        <p class="text-green-200">Quantum Computing Expert</p>
+                        <p class="text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Genius programmer who helps Elara decode the signal's complex patterns using experimental quantum algorithms.</p>
+                    </div>
+                </div>
+                
+                <div class="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500">
+                    <img src="/resources/photos/marcus.JPG" alt="General Marcus Cole - imposing military officer in his 60s with close-cropped silver hair, wearing dress uniform with numerous medals" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-0 left-0 p-6 w-full">
+                        <h3 class="text-2xl font-bold text-white">General Marcus Cole</h3>
+                        <p class="text-red-200">Military Overseer</p>
+                        <p class="text-gray-300 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Powerful defense official who sees the signal as either humanity's greatest threat or most powerful weapon.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Interactive Elements -->
+        <div class="mb-20">
+            <h2 class="text-3xl font-bold mb-12 text-center text-cyan-300">Explore The Signal</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="bg-gray-900 bg-opacity-70 p-8 rounded-xl border border-gray-800">
+                    <h3 class="text-2xl font-bold mb-6 text-cyan-300">Signal Timeline</h3>
+                    <div class="space-y-8">
+                        <div class="flex">
+                            <div class="flex-shrink-0 mr-4">
+                                <div class="flex items-center justify-center w-12 h-12 rounded-full bg-cyan-600 text-white font-bold">1</div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Day 1: Initial Detection</h4>
+                                <p class="text-gray-300">Elara notices anomalous patterns in routine deep space monitoring data.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="flex-shrink-0 mr-4">
+                                <div class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-600 text-white font-bold">3</div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Day 3: Signal Confirmation</h4>
+                                <p class="text-gray-300">The signal repeats with identical structure, confirming artificial origin.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="flex-shrink-0 mr-4">
+                                <div class="flex items-center justify-center w-12 h-12 rounded-full bg-red-600 text-white font-bold">7</div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Day 7: Global Effects</h4>
+                                <p class="text-gray-300">First reports of electronic disturbances and shared dreams emerge worldwide.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex">
+                            <div class="flex-shrink-0 mr-4">
+                                <div class="flex items-center justify-center w-12 h-12 rounded-full bg-yellow-600 text-white font-bold">14</div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Day 14: Countdown Discovered</h4>
+                                <p class="text-gray-300">Elara and Linh decode the prime number sequence as a countdown.</p>
+                            </div>
                         </div>
                     </div>
-                    <h4 class="text-xl font-bold mb-2">OBLIVION 3</h4>
-                    <p class="text-blue-200 opacity-90">The destiny of Earth</p>
+                </div>
+                
+                <div class="bg-gray-900 bg-opacity-70 p-8 rounded-xl border border-gray-800">
+                    <h3 class="text-2xl font-bold mb-6 text-cyan-300">Decode The Signal</h3>
+                    <div class="mb-6">
+                        <label class="block text-gray-300 mb-2">Enter Prime Sequence:</label>
+                        <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="2, 3, 5, 7, 11, 13...">
+                    </div>
+                    <button class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 mb-6">
+                        Analyze Pattern
+                    </button>
+                    <div class="terminal p-4 h-40 overflow-y-auto">
+                        <p class="text-green-400 font-mono">> Waiting for input...</p>
+                        <p class="text-green-400 font-mono">> Prime sequence analyzer ready</p>
+                        <p class="text-green-400 font-mono">> Enter at least 6 primes to begin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Call to Action -->
+        <div class="text-center mb-20">
+            <h2 class="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-600">Join The Investigation</h2>
+            <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">Subscribe to receive updates as Dr. Vex and her team unravel the mystery of the cosmic signal.</p>
+            <div class="max-w-md mx-auto">
+                <div class="flex">
+                    <input type="email" placeholder="Your email address" class="flex-grow bg-gray-800 border border-gray-700 rounded-l-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                    <button class="bg-cyan-600 hover:bg-cyan-700 text-white font-bold px-6 py-3 rounded-r-lg transition-all duration-300">
+                        Subscribe
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-    <!-- Reading Modal -->
-    <div id="readingModal" class="fixed inset-0 bg-black/90 z-50 hidden">
-        <div class="container mx-auto py-16 px-4 h-full flex flex-col">
-            <button id="closeModal" class="absolute top-4 right-4 text-white text-3xl">&times;</button>
-            <div class="reader-content bg-space-dark p-8 rounded-lg max-w-4xl mx-auto overflow-y-auto">
-                <h2 id="chapterTitle" class="text-3xl font-bold mb-6 text-neon-blue"></h2>
-                <div id="chapterContent" class="prose prose-invert max-w-none"></div>
+    
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-80 py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h3 class="text-2xl font-bold text-cyan-300">OBLIVION</h3>
+                    <p class="text-gray-400">A Sci-Fi Mystery Series</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-cyan-300 transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.
+                            368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                    </a>
+                </div>
             </div>
-            <div class="flex justify-between mt-8 max-w-4xl mx-auto w-full">
-                <button id="prevChapter" class="bg-nebula-purple px-6 py-3 rounded-lg font-medium">Previous Chapter</button>
-                <span id="chapterIndicator" class="self-center text-blue-300">Chapter 1</span>
-                <button id="nextChapter" class="bg-nebula-purple px-6 py-3 rounded-lg font-medium">Next Chapter</button>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2025 artemis. All rights reserved.</p>
+                <p class="mt-2 text-sm">The events depicted are fictional. Any resemblance to actual events is purely coincidental.</p>
             </div>
         </div>
-    </div>
-
-    <!-- UFO Home Button -->
-    <a href="public/web.html" id="ufoHomeBtn" title="Return Home" class="fixed top-6 right-8 z-50 group" style="cursor:pointer;">
-        <svg width="64" height="40" viewBox="0 0 64 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-lg transition-transform duration-300 group-hover:scale-110">
-            <!-- UFO body -->
-            <ellipse cx="32" cy="28" rx="24" ry="8" fill="#a3e3ff" stroke="#4fd1ff" stroke-width="2"/>
-            <!-- UFO dome -->
-            <ellipse cx="32" cy="22" rx="12" ry="6" fill="#e0e0ff" stroke="#4fd1ff" stroke-width="2"/>
-            <!-- UFO lights -->
-            <circle cx="20" cy="28" r="2" fill="#fff200"/>
-            <circle cx="32" cy="28" r="2" fill="#ff6bcb"/>
-            <circle cx="44" cy="28" r="2" fill="#00ffb3"/>
-            <!-- UFO beam (on hover) -->
-            <g class="group-hover:opacity-60 opacity-0 transition-opacity duration-300">
-                <polygon points="28,36 36,36 32,60" fill="#a3e3ff"/>
-            </g>
-        </svg>
-    </a>
-
-    <script src="../src/index.js"></script>
+    </footer>
+    
+    <script>
+        // Interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Simulate terminal typing effect
+            const terminal = document.querySelector('.terminal');
+            const analyzeBtn = document.querySelector('button');
+            
+            analyzeBtn.addEventListener('click', function() {
+                const input = document.querySelector('input[type="text"]').value;
+                const primes = input.split(',').map(p => parseInt(p.trim()));
+                
+                if (primes.length >= 6 && primes.every(p => isPrime(p))) {
+                    terminal.innerHTML = `
+                        <p class="text-green-400 font-mono">> Analyzing sequence...</p>
+                        <p class="text-green-400 font-mono">> Pattern detected: Fibonacci-like progression</p>
+                        <p class="text-green-400 font-mono">> Embedded message found in prime gaps</p>
+                        <p class="text-yellow-400 font-mono">> WARNING: Countdown sequence detected</p>
+                        <p class="text-red-400 font-mono">> Days remaining: ${primes[primes.length-1]}</p>
+                    `;
+                } else {
+                    terminal.innerHTML = `
+                        <p class="text-red-400 font-mono">> ERROR: Invalid prime sequence</p>
+                        <p class="text-green-400 font-mono">> Please enter at least 6 valid primes</p>
+                    `;
+                }
+            });
+            
+            function isPrime(num) {
+                for(let i = 2, s = Math.sqrt(num); i <= s; i++)
+                    if(num % i === 0) return false; 
+                return num > 1;
+            }
+            
+            // Character card hover effects
+            const characterCards = document.querySelectorAll('.group');
+            characterCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.querySelector('img').style.transform = 'scale(1.1)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.querySelector('img').style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
